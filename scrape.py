@@ -90,7 +90,9 @@ if __name__ == "__main__":
         #YES - Shall we enter the debug mode?
         if sys.argv[2].upper() == "DEBUG":
             #YES - Print all the information
-            print( "DEBUG MODE:")
+            print()
+            print( " ℹ️  " + sys.argv[1] )
+            print()
             print( " OACI    " + sys.argv[1].upper() )
             print( " IATA    " + myAirport.IATA )
             print( " Name    " + myAirport.NAME )
@@ -99,25 +101,28 @@ if __name__ == "__main__":
             print( " Country " + myAirport.COUNTRY )
             print( " Flag    " + myAirport.FLAG )
             print( " Coord   " + myAirport.LAT + " / " + myAirport.LON )
+            print()
         else:
             print( "You may want to check your parameters." )
     else:
         #NO - Is the data valid?
         if myAirport.isValid == True:
             #YES - Print overview
-            print("============================================================")
-            print("Name    " + myAirport.NAME )
-            print("ICAO    " + myAirport.ICAO )
-            print("IATA    " + myAirport.IATA )
-            print("City    " + myAirport.CITY )
-            print("Region  " + myAirport.REGION )
-            print("Country " + myAirport.COUNTRY )
-            print("Coord   " + myAirport.LAT + "," +myAirport.LON )
-            print("Flag    " + myAirport.FLAG )
+            print()
+            print( " 💽  " + sys.argv[1] )
+            print()
+            print(" Name    " + myAirport.NAME )
+            print(" ICAO    " + myAirport.ICAO )
+            print(" IATA    " + myAirport.IATA )
+            print(" City    " + myAirport.CITY )
+            print(" Region  " + myAirport.REGION )
+            print(" Country " + myAirport.COUNTRY )
+            print(" Coord   " + myAirport.LAT + "," +myAirport.LON )
+            print(" Flag    " + myAirport.FLAG )
             #Store it in the database
             try:
                 #Connect to DB
-                myConnection = sqlite3.connect('icao.db')
+                myConnection = sqlite3.connect('icao.db') #TODO: Get the DB name as a command line argument.
                 #Get the cursor
                 myCursor = myConnection.cursor()
                 #Instert data
@@ -125,11 +130,15 @@ if __name__ == "__main__":
                 #Write it
                 myConnection.commit()
                 #Inform upon success
-                print("Done")
+                print()
+                print(" ✔️   saved")
+                print()
             #If there is any error of type sqlite3.OperationalError, sqlite3.IntegrityError
             except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
                 #Inform the user
-                print("Error: " + str(e) )
+                print()
+                print( " ⚠️   " + str(e) )
+                print()
                 #Open the error log
                 myErrorLog = open("errors.txt","a")
                 #Log the error to file
@@ -141,35 +150,3 @@ if __name__ == "__main__":
                 #Close the database
                 myConnection.close()
             #Print message
-            print("============================================================")
-
-
-#SQLite Table airports:
-# create table airports (
-# 	icao varchar(4) unique primary key,
-# 	iata varchar(3) ,
-# 	name varchar(255),
-# 	city varchar(255),
-# 	region varchar(255),
-# 	country varchar(255),
-# 	latitude numeric,
-# 	longitude numeric,
-#   flag varchar(3)
-# )
-
-#To run this, from a command line, take this one-liner (this is for letter X)...
-#
-# START_time=`date`;
-# LETTER='X';
-# clear;
-# for t in {A..Z}; do
-#     for s in {A..Z}; do
-#         for l in {A..Z}; do
-#             echo -ne " $LETTER$t$s$l\\r";
-#             ./scrape.py $LETTER$t$s$l;
-#         done;
-#     done;
-# done;
-# echo "Start time: $START_TIME";
-# $END_TIME=`date`;
-# echo "End   time: $END_TIME"
