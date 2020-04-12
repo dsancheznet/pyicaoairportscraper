@@ -41,7 +41,7 @@ You could even add another level of depth to scrape the whole database. But be a
 
 Let's say that every airport takes 2 seconds to check on average; that would make
 
-<b>T</b><sub>total</sub> = T<sub>iter</sub> * ( I<sub>digit</sub><super>4</super> )
+<b>T</b><sub>total</sub> = T<sub>iter</sub> * ( I<sub>digit</sub><sup>4</sup> )
 
 Being a total of 913.952 seconds. This makes a total of 10,578148148 days.
 
