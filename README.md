@@ -4,7 +4,7 @@
 
 ### Usage
 
-`./scpare.py XXXX [DEBUG]`
+`./scrape.py XXXX [DEBUG]`
 
 Where XXXX is the ICAO code for the airport you want to get the info for;
 
@@ -35,6 +35,32 @@ done;
 echo "Start time: $START_TIME";
 $END_TIME=`date`;
 echo "End   time: $END_TIME"
+```
+
+You could even add another level of depth to scrape the whole database. But be aware:
+
+Let's say that every airport takes 2 seconds to check on average; that would make
+
+<b>T</b><sub>total</sub> = T<sub>iter</sub> * ( I<sub>digit</sub><super>4</super> )
+
+Being a total of 913.952 seconds. This makes a total of 10,578148148 days.
+
+### icao.db structure
+
+This sqlite3 database is structured as follows:
+
+```sqlite3
+create table airports (
+  cao varchar(4) unique primary key,
+  iata varchar(3) ,
+  name varchar(255),
+  city varchar(255),
+  region varchar(255),
+  country varchar(255),
+  latitude numeric,
+  longitude numeric,
+  flag varchar(3)
+)
 ```
 
 ### Data source
