@@ -89,27 +89,27 @@ if __name__ == "__main__":
     if len( sys.argv )>2:
         #YES - Shall we enter the debug mode?
         if sys.argv[2].upper() == "DEBUG":
-            #YES - Print all the information
-            print()
-            print( " ℹ️  " + sys.argv[1] )
-            print()
-            print( " OACI    " + sys.argv[1].upper() )
-            print( " IATA    " + myAirport.IATA )
-            print( " Name    " + myAirport.NAME )
-            print( " City    " + myAirport.CITY )
-            print( " Region  " + myAirport.REGION )
-            print( " Country " + myAirport.COUNTRY )
-            print( " Flag    " + myAirport.FLAG )
-            print( " Coord   " + myAirport.LAT + " / " + myAirport.LON )
-            print()
+            #Is the data valid?
+            if myAirport.isValid == True:
+                #YES - Print all the information
+                print( " ℹ️   " )
+                print()
+                print( " OACI    " + sys.argv[1].upper() )
+                print( " IATA    " + myAirport.IATA )
+                print( " Name    " + myAirport.NAME )
+                print( " City    " + myAirport.CITY )
+                print( " Region  " + myAirport.REGION )
+                print( " Country " + myAirport.COUNTRY )
+                print( " Flag    " + myAirport.FLAG )
+                print( " Coord   " + myAirport.LAT + " / " + myAirport.LON )
+                print()
         else:
             print( "You may want to check your parameters." )
     else:
         #NO - Is the data valid?
         if myAirport.isValid == True:
             #YES - Print overview
-            print()
-            print( " 💽  " + sys.argv[1] )
+            print( " 💽   " + sys.argv[1] )
             print()
             print(" Name    " + myAirport.NAME )
             print(" ICAO    " + myAirport.ICAO )
